@@ -97,7 +97,9 @@ def checkHash(filename, first_run, resource_id):
 def updateDatastore(filename, resource_id):
 
     # Checking if there is new data
-    update_data = checkHash(filename, first_run = False, resource_id)
+    update_data = checkHash(filename=filename,
+                            first_run = False,
+                            resource_id=resource_id)
     if (update_data == False):
         print "\nDataStore Status: No new data. Not updating datastore."
         return
