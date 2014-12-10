@@ -94,7 +94,7 @@ def checkHash(filename, first_run, resource_id):
     return new_data
 
 
-def updateDatastore(filename, resource_id):
+def updateDatastore(filename, resource_id, resource):
 
     # Checking if there is new data
     update_data = checkHash(filename=filename,
@@ -137,12 +137,13 @@ def updateDatastore(filename, resource_id):
         ckan = ckanapi.RemoteCKAN('http://data.hdx.rwlabs.org', apikey=apikey)
 
     # running the upload function
-    upload_data_to_datastore(resource['resource_id'], resource)
+    upload_data_to_datastore(resource_id, resource)
 
 # wrapper call for all functions
 def runEverything(p):
     # fetch the resources list
     resources = getResources(p)
+    print '-------------------------------------'
 
     # iterating through the provided list of resources
     for i in range(0,len(resources)):
@@ -150,7 +151,10 @@ def runEverything(p):
         resource_id = resource['resource_id']  # getting the resource_id
         print "Reading resource id: " + resource_id
         downloadResource(p, resource_id)
-        updateDatastore(p, resource_id)
+        updateDatastore(p, resource_id, resource)
+    print '-------------------------------------'
+    print 'Done.'
+    print '-------------------------------------'
 
 
 # Error handler for running the entire script
