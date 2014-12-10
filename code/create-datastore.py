@@ -19,8 +19,8 @@ import hashlib
 # Collecting configuration variables
 apikey = sys.argv[1]
 
-# ckan will be an instance of ckan api wrapper
-ckan = None
+# configuring the remote CKAN instance
+ckan = ckanapi.RemoteCKAN('http://data.hdx.rwlabs.org', apikey=apikey)
 
 # This is where the resources are declared. For now,
 # they are declared as a Python list.
@@ -132,9 +132,7 @@ def updateDatastore(filename, resource_id, resource):
                     method='insert',
                     records=rowset)
             offset += chunksize
-            print('Done: %s' % offset)
-
-        ckan = ckanapi.RemoteCKAN('http://data.hdx.rwlabs.org', apikey=apikey)
+            print('Update successful: %s' % offset)
 
     # running the upload function
     upload_data_to_datastore(resource_id, resource)
