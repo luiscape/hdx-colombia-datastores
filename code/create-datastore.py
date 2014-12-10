@@ -143,7 +143,7 @@ def runEverything(p):
     resources = getResources(PATH)
 
     # iterating through the provided list of resources
-    for i in len(resources):
+    for i in range(0,len(resources)):
         resource = resources[i]  # getting the right resource
         resource_id = resource['resource_id']  # getting the resource_id
         downloadResource(p)
