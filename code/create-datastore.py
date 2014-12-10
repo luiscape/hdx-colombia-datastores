@@ -5,7 +5,7 @@
 PATH = 'tool/data/temp_data.csv'
 
 # dependencies
-import offset
+# import offset
 import csv
 import json
 import scraperwiki
@@ -21,6 +21,37 @@ apikey = sys.argv[1]
 
 # ckan will be an instance of ckan api wrapper
 ckan = None
+
+#  This is where the resources are declared. For now,
+#  they are declared as a Python list.
+
+# defining the schemas.
+# 2 resources are declared here.
+def getResources(p):
+    resources = [
+        {
+            'resource_id': '6b0175c6-1209-42ed-9026-8bbaca7ea310',
+            'path': p,
+            'schema': {
+                "fields": [
+                  { "id": "Year", "type": "integer" },
+                  { "id": "Persons", "type": "float" }
+                ]
+            },
+        },
+        {
+            'resource_id': '9e69d499-0b2b-4da6-9c61-10e453a57504',
+            'path': p,
+            'schema': {
+                "fields": [
+                  { "id": "Month", "type": "date" },
+                  { "id": "Persons", "type": "float" }
+                ]
+            },
+        }
+    ]
+
+    return resources
 
 # Function to download a resource from CKAN.
 def downloadResource(filename):
@@ -108,6 +139,9 @@ def updateDatastore(filename):
 
 # wrapper call for all functions
 def runEverything(p):
+    # fetch the resources list
+    resources = getResources(PATH)
+
     # iterating through the provided list of resources
     for i in len(resources):
         resource = resources[i]  # getting the right resource
