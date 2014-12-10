@@ -22,11 +22,11 @@ apikey = sys.argv[1]
 # ckan will be an instance of ckan api wrapper
 ckan = None
 
-#  This is where the resources are declared. For now,
-#  they are declared as a Python list.
-
-# defining the schemas.
-# 2 resources are declared here.
+# This is where the resources are declared. For now,
+# they are declared as a Python list.
+# This is a skeleton of a function that
+# should fetch those schemas using other
+# more refined methods.
 def getResources(p):
     resources = [
         {
@@ -54,7 +54,7 @@ def getResources(p):
     return resources
 
 # Function to download a resource from CKAN.
-def downloadResource(filename):
+def downloadResource(filename, resource_id):
 
     # querying
     url = 'https://data.hdx.rwlabs.org/api/action/resource_show?id=' + resource_id
@@ -140,13 +140,13 @@ def updateDatastore(filename):
 # wrapper call for all functions
 def runEverything(p):
     # fetch the resources list
-    resources = getResources(PATH)
+    resources = getResources(p)
 
     # iterating through the provided list of resources
     for i in range(0,len(resources)):
         resource = resources[i]  # getting the right resource
         resource_id = resource['resource_id']  # getting the resource_id
-        downloadResource(p)
+        downloadResource(p, resource_id)
         updateDatastore(p)
 
 
