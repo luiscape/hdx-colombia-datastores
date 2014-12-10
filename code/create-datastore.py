@@ -44,7 +44,7 @@ def getResources(p):
             'path': p,
             'schema': {
                 "fields": [
-                  { "id": "Month", "type": "timestamp" },
+                  { "id": "Date", "type": "timestamp" },
                   { "id": "Persons", "type": "float" }
                 ]
             },
