@@ -6,6 +6,7 @@ PATH = 'tool/data/temp_data.csv'
 
 # dependencies
 # import offset
+import os
 import csv
 import json
 import scraperwiki
