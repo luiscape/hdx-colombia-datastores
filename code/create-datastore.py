@@ -146,6 +146,7 @@ def runEverything(p):
     for i in range(0,len(resources)):
         resource = resources[i]  # getting the right resource
         resource_id = resource['resource_id']  # getting the resource_id
+        print "Reading resource id: " + resource_id
         downloadResource(p, resource_id)
         updateDatastore(p)
 
