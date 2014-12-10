@@ -44,7 +44,7 @@ def getResources(p):
             'path': p,
             'schema': {
                 "fields": [
-                  { "id": "Month", "type": "date" },
+                  { "id": "Month", "type": "timestamp" },
                   { "id": "Persons", "type": "float" }
                 ]
             },
@@ -98,7 +98,7 @@ def updateDatastore(filename, resource_id, resource):
 
     # Checking if there is new data
     update_data = checkHash(filename=filename,
-                            first_run = True,
+                            first_run = False,
                             resource_id=resource_id)
     if (update_data == False):
         print "DataStore Status: No new data. Not updating datastore."
