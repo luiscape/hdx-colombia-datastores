@@ -3,15 +3,15 @@
 #  they are declared as a Python list.
 
 # defining the schemas.
-# 4 resources are declared here.
+# 2 resources are declared here.
 resources = [
     {
-        'resource_id': '3fb3f50e-6bb7-44af-8ac9-6e50db433f67',
-        'path': PATH,  # check if the path continues the same
+        'resource_id': '6b0175c6-1209-42ed-9026-8bbaca7ea310',
+        'path': PATH,
         'schema': {
             "fields": [
-              { "id": "Ano", "type": "date" },
-              { "id": "IDPs_historico", "type": "float" }
+              { "id": "Year", "type": "integer" },
+              { "id": "Persons", "type": "float" }
             ]
         },
     },
@@ -20,28 +20,8 @@ resources = [
         'path': PATH,
         'schema': {
             "fields": [
-              { "id": "CHD_Indicator_Code", "type": "text" },
-              { "id": "Date", "type": "timestamp" }
-            ]
-        },
-    },
-    {
-        'resource_id': '0f39852c-e4bd-4c41-b5a1-88f38564955f',
-        'path': PATH,
-        'schema': {
-            "fields": [
-              { "id": "CHD_Indicator_Code", "type": "text" },
-              { "id": "Date", "type": "timestamp" }
-            ]
-        },
-    },
-    {
-        'resource_id': '6b0175c6-1209-42ed-9026-8bbaca7ea310',
-        'path': PATH,
-        'schema': {
-            "fields": [
-              { "id": "Ano", "type": "date" },
-              { "id": "IDPs_historico", "type": "float" }
+              { "id": "Month", "type": "date" },
+              { "id": "Persons", "type": "float" }
             ]
         },
     }

@@ -4,7 +4,8 @@
 # path to download
 PATH = 'tool/data/temp_data.csv'
 
-import os
+# dependencies
+import offset
 import csv
 import json
 import scraperwiki
@@ -16,7 +17,6 @@ import hashlib
 import hdx_resources
 
 # Collecting configuration variables
-remote = 'http://data.hdx.rwlabs.org'
 apikey = sys.argv[1]
 
 # ckan will be an instance of ckan api wrapper
@@ -101,26 +101,17 @@ def updateDatastore(filename):
             offset += chunksize
             print('Done: %s' % offset)
 
-    if __name__ == '__main__':
-        if len(sys.argv) <= 2:
-            usage = '''python scripts/upload.py {resource-id} {api-key}
+        ckan = ckanapi.RemoteCKAN('http://data.hdx.rwlabs.org', apikey=apikey)
 
-            e.g.
-
-            python scripts/upload.py http://datahub.io/ RESOURCE_ID API_KEY
-            '''
-            print(usage)
-            sys.exit(1)
-
-        ckan = ckanapi.RemoteCKAN(remote, apikey=apikey)
-
+    # running the upload function
+    upload_data_to_datastore(resource['resource_id'], resource)
 
 # wrapper call for all functions
 def runEverything(p):
     # iterating through the provided list of resources
     for i in len(resources):
-        resource = resources[i]  # grabbing the resource
-        upload_data_to_datastore(resource['resource_id'], resource)
+        resource = resources[i]  # getting the right resource
+        resource_id = resource['resource_id']  # getting the resource_id
         downloadResource(p)
         updateDatastore(p)
 
