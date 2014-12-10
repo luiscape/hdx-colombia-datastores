@@ -14,7 +14,6 @@ import urllib
 import requests
 import sys
 import hashlib
-import hdx_resources
 
 # Collecting configuration variables
 apikey = sys.argv[1]
