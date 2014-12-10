@@ -72,7 +72,7 @@ def downloadResource(filename, resource_id):
 # and stores as a SW variable the new hash
 # if they differ. If this function returns true,
 # then the datastore is created.
-def checkHash(filename, first_run):
+def checkHash(filename, first_run, resource_id):
     hasher = hashlib.sha1()
     with open(filename, 'rb') as afile:
         buf = afile.read()
@@ -82,22 +82,22 @@ def checkHash(filename, first_run):
     # checking if the files are identical or if
     # they have changed
     if first_run:
-        scraperwiki.sqlite.save_var('hash', new_hash)
+        scraperwiki.sqlite.save_var(resource_id, new_hash)
         new_data = False
 
     else:
-        old_hash = scraperwiki.sqlite.get_var('hash')
-        scraperwiki.sqlite.save_var('hash', new_hash)
+        old_hash = scraperwiki.sqlite.get_var(resource_id)
+        scraperwiki.sqlite.save_var(resource_id, new_hash)
         new_data = old_hash != new_hash
 
     # returning a boolean
     return new_data
 
 
-def updateDatastore(filename):
+def updateDatastore(filename, resource_id):
 
     # Checking if there is new data
-    update_data = checkHash(filename, first_run = False)
+    update_data = checkHash(filename, first_run = False, resource_id)
     if (update_data == False):
         print "\nDataStore Status: No new data. Not updating datastore."
         return
@@ -148,7 +148,7 @@ def runEverything(p):
         resource_id = resource['resource_id']  # getting the resource_id
         print "Reading resource id: " + resource_id
         downloadResource(p, resource_id)
-        updateDatastore(p)
+        updateDatastore(p, resource_id)
 
 
 # Error handler for running the entire script
